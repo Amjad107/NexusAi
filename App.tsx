@@ -13,7 +13,6 @@ import { StorageService } from './services/storageService';
 import { generateWebsite } from './services/geminiService';
 
 const App: React.FC = () => {
-  // State initialized from StorageService
   const [settings, setSettings] = useState<AppSettings>(() => StorageService.getSettings());
   const [user, setUser] = useState<User | null>(() => StorageService.getUser());
   const [projects, setProjects] = useState<Project[]>(() => StorageService.getProjects());
@@ -28,7 +27,6 @@ const App: React.FC = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Persistence Effects
   useEffect(() => {
     const root = window.document.documentElement;
     if (theme === 'dark') {

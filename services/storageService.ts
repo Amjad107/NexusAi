@@ -1,12 +1,7 @@
 import { Project, User, AppSettings } from '../types';
 import { INITIAL_SETTINGS, MOCK_USER, MOCK_PROJECTS } from '../constants';
 
-/**
- * StorageService abstracts the data layer.
- * Connects to Neon SQL over HTTP if configured.
- */
 export const StorageService = {
-  // --- Internal Helper for Neon ---
   queryNeon: async (sql: string, params: any[] = []) => {
     const settings = StorageService.getSettings();
     if (settings.databaseMode !== 'neon' || !settings.neonConnectionString) {
@@ -40,13 +35,11 @@ export const StorageService = {
     return { success: true, message: `Connected! Database time: ${result[0]?.now || 'unknown'}` };
   },
 
-  // --- App Settings ---
   getSettings: (): AppSettings => {
     try {
       const saved = localStorage.getItem('app_settings');
       return saved ? JSON.parse(saved) : INITIAL_SETTINGS;
     } catch (e) {
-      console.error("Failed to parse settings", e);
       return INITIAL_SETTINGS;
     }
   },
@@ -55,13 +48,11 @@ export const StorageService = {
     localStorage.setItem('app_settings', JSON.stringify(settings));
   },
 
-  // --- User Profile ---
   getUser: (): User | null => {
     try {
       const saved = localStorage.getItem('app_user');
       return saved ? JSON.parse(saved) : MOCK_USER;
     } catch (e) {
-      console.error("Failed to parse user", e);
       return MOCK_USER;
     }
   },
@@ -74,25 +65,17 @@ export const StorageService = {
     }
   },
 
-  // --- Projects ---
   getProjects: (): Project[] => {
     try {
       const saved = localStorage.getItem('user_projects');
       return saved ? JSON.parse(saved) : MOCK_PROJECTS;
     } catch (e) {
-      console.error("Failed to parse projects", e);
       return MOCK_PROJECTS;
     }
   },
 
   saveProjects: (projects: Project[]): void => {
     localStorage.setItem('user_projects', JSON.stringify(projects));
-    
-    // Trigger Neon Sync if enabled
-    const settings = StorageService.getSettings();
-    if (settings.databaseMode === 'neon' && settings.neonConnectionString && settings.isDbVerified) {
-      console.log("Database Verified: Syncing projects to Neon cloud...");
-    }
   },
 
   addProject: (project: Project): void => {

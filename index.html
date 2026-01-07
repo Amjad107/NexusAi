@@ -6,14 +6,11 @@
     <title>NexusAI | Modern AI Site Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Tailwind configuration
         window.tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    animation: {
-                        blob: "blob 7s infinite",
-                    },
+                    animation: { blob: "blob 7s infinite" },
                     keyframes: {
                         blob: {
                             "0%": { transform: "translate(0px, 0px) scale(1)" },
@@ -55,7 +52,6 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
     <div id="root"></div>
-    <!-- Script entry point -->
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>

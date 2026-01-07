@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { WebsiteSection } from '../types';
 
-// Using the pre-configured API key from the environment
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SECTION_SCHEMA = {
@@ -77,7 +76,6 @@ export const generateWebsite = async (prompt: string): Promise<WebsiteSection[]>
     return JSON.parse(text) as WebsiteSection[];
   } catch (error) {
     console.error("Gemini Generation Error:", error);
-    // Fallback structure in case of API failure
     return [
       { 
         id: '1', 
@@ -106,10 +104,7 @@ export const editWebsite = async (prompt: string, currentSections: WebsiteSectio
       contents: [{
         parts: [{
           text: `You are an expert web editor. Given the current website sections and a user request, update the sections. 
-          You can modify content, change styles, add new sections, or remove irrelevant ones.
-          
           Current Sections: ${JSON.stringify(currentSections)}
-          
           User Request: "${prompt}"`
         }]
       }],
