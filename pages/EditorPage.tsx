@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef } from 'react';
 import { 
   Monitor, Smartphone, Tablet, Save, Download, 
@@ -8,9 +7,9 @@ import {
   Type as TypeIcon, Palette, Eye, EyeOff, MoreHorizontal,
   Bold, Italic, Underline, List, Link as LinkIcon, Code
 } from 'lucide-react';
-import WebsitePreview from '../components/Editor/WebsitePreview.tsx';
-import { ViewportMode, WebsiteSection, Project } from '../types.ts';
-import { editWebsite } from '../services/geminiService.ts';
+import WebsitePreview from '../components/Editor/WebsitePreview';
+import { ViewportMode, WebsiteSection, Project } from '../types';
+import { editWebsite } from '../services/geminiService';
 
 interface EditorPageProps {
   project: Project;

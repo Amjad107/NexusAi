@@ -1,6 +1,5 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
-import { WebsiteSection } from '../types.ts';
+import { WebsiteSection } from '../types';
 
 // Using the pre-configured API key from the environment
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
