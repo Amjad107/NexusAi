@@ -15,8 +15,6 @@ export const StorageService = {
     }
 
     try {
-      // Neon SQL-over-HTTP endpoint usually follows the pattern:
-      // https://[project-id].[region].aws.neon.tech/sql
       const response = await fetch(`${settings.neonConnectionString}/sql`, {
         method: 'POST',
         headers: { 
@@ -45,8 +43,13 @@ export const StorageService = {
 
   // --- App Settings ---
   getSettings: (): AppSettings => {
-    const saved = localStorage.getItem('app_settings');
-    return saved ? JSON.parse(saved) : INITIAL_SETTINGS;
+    try {
+      const saved = localStorage.getItem('app_settings');
+      return saved ? JSON.parse(saved) : INITIAL_SETTINGS;
+    } catch (e) {
+      console.error("Failed to parse settings", e);
+      return INITIAL_SETTINGS;
+    }
   },
 
   saveSettings: (settings: AppSettings): void => {
@@ -55,8 +58,13 @@ export const StorageService = {
 
   // --- User Profile ---
   getUser: (): User | null => {
-    const saved = localStorage.getItem('app_user');
-    return saved ? JSON.parse(saved) : MOCK_USER;
+    try {
+      const saved = localStorage.getItem('app_user');
+      return saved ? JSON.parse(saved) : MOCK_USER;
+    } catch (e) {
+      console.error("Failed to parse user", e);
+      return MOCK_USER;
+    }
   },
 
   saveUser: (user: User | null): void => {
@@ -69,8 +77,13 @@ export const StorageService = {
 
   // --- Projects ---
   getProjects: (): Project[] => {
-    const saved = localStorage.getItem('user_projects');
-    return saved ? JSON.parse(saved) : MOCK_PROJECTS;
+    try {
+      const saved = localStorage.getItem('user_projects');
+      return saved ? JSON.parse(saved) : MOCK_PROJECTS;
+    } catch (e) {
+      console.error("Failed to parse projects", e);
+      return MOCK_PROJECTS;
+    }
   },
 
   saveProjects: (projects: Project[]): void => {
@@ -80,7 +93,6 @@ export const StorageService = {
     const settings = StorageService.getSettings();
     if (settings.databaseMode === 'neon' && settings.neonConnectionString && settings.isDbVerified) {
       console.log("Database Verified: Syncing projects to Neon cloud...");
-      // In a real implementation, we would perform an UPSERT here
     }
   },
 

@@ -7,6 +7,13 @@
     <title>NexusAI | Modern AI Site Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Shim for process.env to prevent ReferenceErrors in raw browser environments
+        window.process = { 
+            env: { 
+                API_KEY: "" // Will be populated by the platform or build process
+            } 
+        };
+
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -53,5 +60,7 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
     <div id="root"></div>
+    <!-- Entry point for the React application -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
