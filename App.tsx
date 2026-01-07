@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import LandingPage from './pages/LandingPage';
-import DashboardPage from './pages/DashboardPage';
-import EditorPage from './pages/EditorPage';
-import PricingPage from './pages/PricingPage';
-import AdminPage from './pages/AdminPage';
-import ProfilePage from './pages/ProfilePage';
-import AuthPage from './pages/AuthPage';
-import { AppSettings, Project, User, WebsiteSection } from './types';
-import { StorageService } from './services/storageService';
-import { generateWebsite } from './services/geminiService';
+import Navbar from './components/Navbar.tsx';
+import Footer from './components/Footer.tsx';
+import LandingPage from './pages/LandingPage.tsx';
+import DashboardPage from './pages/DashboardPage.tsx';
+import EditorPage from './pages/EditorPage.tsx';
+import PricingPage from './pages/PricingPage.tsx';
+import AdminPage from './pages/AdminPage.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
+import AuthPage from './pages/AuthPage.tsx';
+import { AppSettings, Project, User, WebsiteSection } from './types.ts';
+import { StorageService } from './services/storageService.ts';
+import { generateWebsite } from './services/geminiService.ts';
 
 const App: React.FC = () => {
   // State initialized from StorageService

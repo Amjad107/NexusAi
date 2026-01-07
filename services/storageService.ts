@@ -1,6 +1,6 @@
 
-import { Project, User, AppSettings } from '../types';
-import { INITIAL_SETTINGS, MOCK_USER, MOCK_PROJECTS } from '../constants';
+import { Project, User, AppSettings } from '../types.ts';
+import { INITIAL_SETTINGS, MOCK_USER, MOCK_PROJECTS } from '../constants.tsx';
 
 /**
  * StorageService abstracts the data layer.
